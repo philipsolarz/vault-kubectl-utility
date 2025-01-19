@@ -2,7 +2,7 @@
 FROM debian:stable-slim as kubectl-builder
 
 ARG KUBECTL_VERSION="latest"
-RUN apt-get update && apt-get install -y curl \
+RUN apt-get update && apt-get install -y bash curl jq \
     && if [ "$KUBECTL_VERSION" = "latest" ]; then \
     KUBECTL_VERSION=$(curl -L -s https://dl.k8s.io/release/stable.txt); \
     fi \
@@ -24,4 +24,4 @@ RUN chmod +x /usr/local/bin/kubectl \
 WORKDIR /vault
 
 # Entrypoint script to run both Vault and allow direct CLI access
-ENTRYPOINT ["/bin/ash"]
+ENTRYPOINT ["/bin/bash"]
