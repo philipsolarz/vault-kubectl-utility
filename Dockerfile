@@ -15,7 +15,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends curl ca-certifi
 FROM hashicorp/vault:latest
 
 # Install bash and jq only, keeping the image lightweight
-RUN apk add --no-cache bash jq
+RUN apk add --no-cache bash jq base64
 
 # Copy kubectl binary from the builder stage
 COPY --from=kubectl-builder /kubectl /usr/local/bin/kubectl
